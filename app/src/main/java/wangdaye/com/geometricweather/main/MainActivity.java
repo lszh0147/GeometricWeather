@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.google.android.material.appbar.AppBarLayout;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -38,6 +40,7 @@ import wangdaye.com.geometricweather.R;
 import wangdaye.com.geometricweather.basic.model.option.DarkMode;
 import wangdaye.com.geometricweather.basic.model.option.provider.WeatherSource;
 import wangdaye.com.geometricweather.basic.model.resource.Resource;
+import wangdaye.com.geometricweather.db.DatabaseHelper;
 import wangdaye.com.geometricweather.main.adapter.main.MainAdapter;
 import wangdaye.com.geometricweather.main.dialog.LocationHelpDialog;
 import wangdaye.com.geometricweather.main.fragment.LocationManageFragment;
@@ -118,6 +121,13 @@ public class MainActivity extends GeoActivity
     };
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        //删除当前位置，打开选择
+        deleteCurrentLocal();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DisplayUtils.setSystemBarStyle(MainActivity.this, getWindow(), true,
@@ -148,8 +158,14 @@ public class MainActivity extends GeoActivity
         ensureResourceProvider();
         ensureColorPicker();
 
+        //删除当前位置，打开选择
+        deleteCurrentLocal();
+
+
         initModel();
         initView();
+
+
 
         registerReceiver(
                 backgroundUpdateReceiver,
@@ -624,6 +640,8 @@ public class MainActivity extends GeoActivity
 
     @Override
     public void onRefresh() {
+        //删除当前位置，打开选择
+        deleteCurrentLocal();
         viewModel.updateWeather(this);
     }
 
@@ -717,6 +735,20 @@ public class MainActivity extends GeoActivity
             if (topChanged || bottomChanged) {
                 DisplayUtils.setSystemBarColor(MainActivity.this, getWindow(), true,
                         topOverlap, false, bottomOverlap, false);
+            }
+        }
+    }
+    //如果没有位置信息，删除当前位置,打开选择
+    private void deleteCurrentLocal(){
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(this);
+        List<Location> locationList = databaseHelper.readLocationList();
+        for (int i = 0; i < locationList.size(); i ++) {
+            if (locationList.get(i).getCityId().equalsIgnoreCase("NULL_ID")){
+                databaseHelper.deleteLocation(locationList.get(0));
+                databaseHelper.deleteWeather(locationList.get(0));
+                if (i == 0){
+                    IntentHelper.startManageActivityForResult(this, MANAGE_ACTIVITY);
+                }
             }
         }
     }

@@ -11,7 +11,7 @@ import wangdaye.com.geometricweather.R;
 import wangdaye.com.geometricweather.basic.model.location.Location;
 import wangdaye.com.geometricweather.basic.model.weather.Weather;
 import wangdaye.com.geometricweather.db.DatabaseHelper;
-import wangdaye.com.geometricweather.location.LocationHelper;
+//import wangdaye.com.geometricweather.location.LocationHelper;
 import wangdaye.com.geometricweather.utils.helpter.IntentHelper;
 import wangdaye.com.geometricweather.weather.WeatherHelper;
 
@@ -23,7 +23,7 @@ public class PollingUpdateHelper {
 
     private Context context;
 
-    private LocationHelper locationHelper;
+//    private LocationHelper locationHelper;
     private WeatherHelper weatherHelper;
 
     private List<Location> locationList;
@@ -32,7 +32,7 @@ public class PollingUpdateHelper {
 
     public PollingUpdateHelper(Context context, List<Location> locationList) {
         this.context = context;
-        this.locationHelper = new LocationHelper(context);
+//        this.locationHelper = new LocationHelper(context);
         this.weatherHelper = new WeatherHelper();
         this.locationList = locationList;
     }
@@ -44,7 +44,7 @@ public class PollingUpdateHelper {
     }
 
     public void cancel() {
-        locationHelper.cancel();
+//        locationHelper.cancel();
         weatherHelper.cancel();
     }
 
@@ -57,8 +57,8 @@ public class PollingUpdateHelper {
             return;
         }
         if (locationList.get(position).isCurrentPosition() && !located) {
-            locationHelper.requestLocation(context, locationList.get(position), true,
-                    new RequestLocationCallback(position, locationList.size()));
+//            locationHelper.requestLocation(context, locationList.get(position), true,
+//                    new RequestLocationCallback(position, locationList.size()));
         } else {
             weatherHelper.requestWeather(context, locationList.get(position),
                     new RequestWeatherCallback(old, position, locationList.size())
@@ -80,41 +80,41 @@ public class PollingUpdateHelper {
 
     // on request location listener.
 
-    private class RequestLocationCallback implements LocationHelper.OnRequestLocationListener {
-
-        private int index;
-        private int total;
-
-        RequestLocationCallback(int index, int total) {
-            this.index = index;
-            this.total = total;
-        }
-
-        @Override
-        public void requestLocationSuccess(Location requestLocation) {
-            locationList.set(index, requestLocation);
-
-            if (requestLocation.isUsable()) {
-                requestData(index, true);
-            } else {
-                requestLocationFailed(requestLocation);
-                Toast.makeText(
-                        context,
-                        context.getString(R.string.feedback_not_yet_location),
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        @Override
-        public void requestLocationFailed(Location requestLocation) {
-            if (locationList.get(index).isUsable()) {
-                requestData(index, true);
-            } else {
-                new RequestWeatherCallback(null, index, total)
-                        .requestWeatherFailed(locationList.get(index));
-            }
-        }
-    }
+//    private class RequestLocationCallback implements LocationHelper.OnRequestLocationListener {
+//
+//        private int index;
+//        private int total;
+//
+//        RequestLocationCallback(int index, int total) {
+//            this.index = index;
+//            this.total = total;
+//        }
+//
+//        @Override
+//        public void requestLocationSuccess(Location requestLocation) {
+//            locationList.set(index, requestLocation);
+//
+//            if (requestLocation.isUsable()) {
+//                requestData(index, true);
+//            } else {
+//                requestLocationFailed(requestLocation);
+//                Toast.makeText(
+//                        context,
+//                        context.getString(R.string.feedback_not_yet_location),
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//
+//        @Override
+//        public void requestLocationFailed(Location requestLocation) {
+//            if (locationList.get(index).isUsable()) {
+//                requestData(index, true);
+//            } else {
+//                new RequestWeatherCallback(null, index, total)
+//                        .requestWeatherFailed(locationList.get(index));
+//            }
+//        }
+//    }
 
     // on request weather listener.
 

@@ -199,11 +199,6 @@ public class Location
         }
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        return country + " " + province + " " + city + " " + district;
-    }
 
     public boolean hasGeocodeInformation() {
         return !TextUtils.isEmpty(country)
@@ -302,4 +297,24 @@ public class Location
             return new Location[size];
         }
     };
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Location{" +
+                "cityId='" + cityId + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", timeZone=" + timeZone +
+                ", country='" + country + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", district='" + district + '\'' +
+                ", weather=" + weather +
+                ", weatherSource=" + weatherSource +
+                ", currentPosition=" + currentPosition +
+                ", residentPosition=" + residentPosition +
+                ", china=" + china +
+                '}';
+    }
 }

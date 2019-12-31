@@ -44,7 +44,7 @@ public class LocationManageFragment extends Fragment
     private CardView cardView;
     private AppCompatImageView searchIcon;
     private TextView searchTitle;
-    private AppCompatImageButton currentLocationButton;
+//    private AppCompatImageButton currentLocationButton;
     private RecyclerView recyclerView;
 
     private LocationAdapter adapter;
@@ -173,11 +173,11 @@ public class LocationManageFragment extends Fragment
         this.searchIcon = view.findViewById(R.id.fragment_location_manage_searchIcon);
         this.searchTitle = view.findViewById(R.id.fragment_location_manage_title);
 
-        this.currentLocationButton = view.findViewById(R.id.fragment_location_manage_currentLocationButton);
-        currentLocationButton.setOnClickListener(v -> {
-            DatabaseHelper.getInstance(requireActivity()).writeLocation(Location.buildLocal());
-            addLocation(true);
-        });
+//        this.currentLocationButton = view.findViewById(R.id.fragment_location_manage_currentLocationButton);
+//        currentLocationButton.setOnClickListener(v -> {
+//            DatabaseHelper.getInstance(requireActivity()).writeLocation(Location.buildLocal());
+//            addLocation(true);
+//        });
 
         this.recyclerView = view.findViewById(R.id.fragment_location_manage_recyclerView);
         recyclerView.setLayoutManager(
@@ -204,8 +204,8 @@ public class LocationManageFragment extends Fragment
                     ColorStateList.valueOf(themePicker.getTextContentColor(requireActivity())));
             searchTitle.setTextColor(
                     ColorStateList.valueOf(themePicker.getTextSubtitleColor(requireActivity())));
-            currentLocationButton.setSupportImageTintList(
-                    ColorStateList.valueOf(themePicker.getTextContentColor(requireActivity())));
+//            currentLocationButton.setSupportImageTintList(
+//                    ColorStateList.valueOf(themePicker.getTextContentColor(requireActivity())));
 
             // background.
             if (colorAnimator != null) {
@@ -299,7 +299,7 @@ public class LocationManageFragment extends Fragment
     }
 
     private void onLocationListChanged(boolean updateShortcuts, boolean notifyOutside) {
-        setCurrentLocationButtonEnabled();
+//        setCurrentLocationButtonEnabled();
         if (updateShortcuts && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
             ShortcutsManager.refreshShortcutsInNewThread(requireActivity(), adapter.itemList);
         }
@@ -316,8 +316,8 @@ public class LocationManageFragment extends Fragment
                 break;
             }
         }
-        currentLocationButton.setEnabled(!hasCurrentLocation);
-        currentLocationButton.setAlpha(hasCurrentLocation ? 0.5f : 1);
+//        currentLocationButton.setEnabled(!hasCurrentLocation);
+//        currentLocationButton.setAlpha(hasCurrentLocation ? 0.5f : 1);
     }
 
     // interface.

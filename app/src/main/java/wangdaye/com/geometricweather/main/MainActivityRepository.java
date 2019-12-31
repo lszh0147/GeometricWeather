@@ -12,19 +12,19 @@ import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
 
 import wangdaye.com.geometricweather.basic.model.location.Location;
-import wangdaye.com.geometricweather.location.LocationHelper;
+//import wangdaye.com.geometricweather.location.LocationHelper;
 import wangdaye.com.geometricweather.main.model.LocationResource;
 import wangdaye.com.geometricweather.weather.WeatherHelper;
 
 public class MainActivityRepository {
 
-    private LocationHelper locationHelper;
+//    private LocationHelper locationHelper;
     private WeatherHelper weatherHelper;
 
     private static final int INVALID_LOCATION_INDEX = -1;
 
     public MainActivityRepository(Context context) {
-        locationHelper = new LocationHelper(context);
+//        locationHelper = new LocationHelper(context);
         weatherHelper = new WeatherHelper();
     }
 
@@ -39,49 +39,49 @@ public class MainActivityRepository {
         boolean defaultLocation = currentLocation.getValue().isDefaultLocation();
 
         if (locate) {
-            locationHelper.requestLocation(context, currentLocation.getValue().data, false,
-                    new LocationHelper.OnRequestLocationListener() {
-                        @Override
-                        public void requestLocationSuccess(Location requestLocation) {
-                            if (!requestLocation.equals(data)) {
-                                return;
-                            }
-
-                            lock.writeLock().lock();
-                            currentLocation.setValue(LocationResource.loading(requestLocation, defaultLocation));
-                            updateLocationList(requestLocation, totalLocationList);
-                            if (l != null) {
-                                l.onCompleted(context);
-                            }
-                            lock.writeLock().unlock();
-
-                            getWeatherWithValidLocationInformation(
-                                    context, currentLocation, totalLocationList, lock);
-                        }
-
-                        @Override
-                        public void requestLocationFailed(Location requestLocation) {
-                            if (!requestLocation.equals(data)) {
-                                return;
-                            }
-
-                            lock.writeLock().lock();
-                            if (requestLocation.isUsable()) {
-                                currentLocation.setValue(
-                                        LocationResource.loading(requestLocation, defaultLocation, true));
-                                updateLocationList(requestLocation, totalLocationList);
-                                lock.writeLock().unlock();
-
-                                getWeatherWithValidLocationInformation(
-                                        context, currentLocation, totalLocationList, lock);
-                            } else {
-                                currentLocation.setValue(
-                                        LocationResource.error(requestLocation, defaultLocation, true));
-                                updateLocationList(requestLocation, totalLocationList);
-                                lock.writeLock().unlock();
-                            }
-                        }
-                    });
+//            locationHelper.requestLocation(context, currentLocation.getValue().data, false,
+//                    new LocationHelper.OnRequestLocationListener() {
+//                        @Override
+//                        public void requestLocationSuccess(Location requestLocation) {
+//                            if (!requestLocation.equals(data)) {
+//                                return;
+//                            }
+//
+//                            lock.writeLock().lock();
+//                            currentLocation.setValue(LocationResource.loading(requestLocation, defaultLocation));
+//                            updateLocationList(requestLocation, totalLocationList);
+//                            if (l != null) {
+//                                l.onCompleted(context);
+//                            }
+//                            lock.writeLock().unlock();
+//
+//                            getWeatherWithValidLocationInformation(
+//                                    context, currentLocation, totalLocationList, lock);
+//                        }
+//
+//                        @Override
+//                        public void requestLocationFailed(Location requestLocation) {
+//                            if (!requestLocation.equals(data)) {
+//                                return;
+//                            }
+//
+//                            lock.writeLock().lock();
+//                            if (requestLocation.isUsable()) {
+//                                currentLocation.setValue(
+//                                        LocationResource.loading(requestLocation, defaultLocation, true));
+//                                updateLocationList(requestLocation, totalLocationList);
+//                                lock.writeLock().unlock();
+//
+//                                getWeatherWithValidLocationInformation(
+//                                        context, currentLocation, totalLocationList, lock);
+//                            } else {
+//                                currentLocation.setValue(
+//                                        LocationResource.error(requestLocation, defaultLocation, true));
+//                                updateLocationList(requestLocation, totalLocationList);
+//                                lock.writeLock().unlock();
+//                            }
+//                        }
+//                    });
         } else {
             getWeatherWithValidLocationInformation(context, currentLocation, totalLocationList, lock);
         }
@@ -138,14 +138,14 @@ public class MainActivityRepository {
         return INVALID_LOCATION_INDEX;
     }
 
-    public List<String> getLocatePermissionList() {
-        return new ArrayList<>(
-                Arrays.asList(locationHelper.getPermissions())
-        );
-    }
+//    public List<String> getLocatePermissionList() {
+////        return new ArrayList<>(
+////                Arrays.asList(locationHelper.getPermissions())
+////        );
+////    }
 
     public void cancel() {
-        locationHelper.cancel();
+//        locationHelper.cancel();
         weatherHelper.cancel();
     }
 

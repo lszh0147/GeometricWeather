@@ -7,7 +7,7 @@
     <string name="version_code">v2.509</string>
 
     <!-- keyword. -->
-    <string name="current_location">Current location</string>
+    <string name="current_location">请输入你所在的城市！</string>
     <string name="resident_location">Resident location</string>
     <string name="default_location">default location</string>
     <string name="live">Live</string>

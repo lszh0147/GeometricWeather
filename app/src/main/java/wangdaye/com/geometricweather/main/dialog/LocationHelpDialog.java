@@ -66,11 +66,11 @@ public class LocationHelpDialog extends DialogFragment {
         );
         ((TextView) view.findViewById(R.id.dialog_location_help_manageTitle)).setTextColor(
                 colorPicker.getTextContentColor(getActivity()));
-        ((TextView) view.findViewById(R.id.dialog_location_help_manageTitle)).setText(
-                getString(R.string.feedback_add_location_manually).replace(
-                        "$", getString(R.string.current_location)
-                )
-        );
+//        ((TextView) view.findViewById(R.id.dialog_location_help_manageTitle)).setText(
+//                getString(R.string.feedback_add_location_manually).replace(
+//                        "$", getString(R.string.current_location)
+//                )
+//        );
     }
 
     public LocationHelpDialog setColorPicker(@NonNull MainThemePicker colorPicker) {

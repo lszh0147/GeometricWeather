@@ -250,38 +250,38 @@ public class MainActivityViewModel extends ViewModel
                 LocationResource.loading(location, currentLocation.getValue().isDefaultLocation())
         );
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && location.isCurrentPosition()) {
-            // check permissions.
-            List<String> permissionList = repository.getLocatePermissionList();
-            for (int i = permissionList.size() - 1; i >= 0; i --) {
-                if (ActivityCompat.checkSelfPermission(activity, permissionList.get(i))
-                        == PackageManager.PERMISSION_GRANTED) {
-                    permissionList.remove(i);
-                }
-            }
-
-            if (permissionList.size() != 0) {
-                // request permission.
-                activity.requestPermissions(permissionList.toArray(new String[0]), 0,
-                        (requestCode, permission, grantResult) -> {
-                            for (int i = 0; i < permission.length && i < grantResult.length; i++) {
-                                if (isPivotalPermission(permission[i])
-                                        && grantResult[i] != PackageManager.PERMISSION_GRANTED) {
-                                    if (location.isUsable()) {
-                                        repository.getWeather(activity,
-                                                currentLocation, locationList, lock,false, this);
-                                    } else {
-                                        currentLocation.setValue(
-                                                LocationResource.error(location, true));
-                                    }
-                                    return;
-                                }
-                            }
-                            repository.getWeather(activity, currentLocation, locationList, lock, true, this);
-                        });
-                return;
-            }
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && location.isCurrentPosition()) {
+//            // check permissions.
+//            List<String> permissionList = repository.getLocatePermissionList();
+//            for (int i = permissionList.size() - 1; i >= 0; i --) {
+//                if (ActivityCompat.checkSelfPermission(activity, permissionList.get(i))
+//                        == PackageManager.PERMISSION_GRANTED) {
+//                    permissionList.remove(i);
+//                }
+//            }
+//
+//            if (permissionList.size() != 0) {
+//                // request permission.
+//                activity.requestPermissions(permissionList.toArray(new String[0]), 0,
+//                        (requestCode, permission, grantResult) -> {
+//                            for (int i = 0; i < permission.length && i < grantResult.length; i++) {
+//                                if (isPivotalPermission(permission[i])
+//                                        && grantResult[i] != PackageManager.PERMISSION_GRANTED) {
+//                                    if (location.isUsable()) {
+//                                        repository.getWeather(activity,
+//                                                currentLocation, locationList, lock,false, this);
+//                                    } else {
+//                                        currentLocation.setValue(
+//                                                LocationResource.error(location, true));
+//                                    }
+//                                    return;
+//                                }
+//                            }
+//                            repository.getWeather(activity, currentLocation, locationList, lock, true, this);
+//                        });
+//                return;
+//            }
+//        }
 
         repository.getWeather(activity, currentLocation, locationList, lock, location.isCurrentPosition(), this);
     }

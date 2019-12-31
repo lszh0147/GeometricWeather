@@ -4,7 +4,7 @@
     <string name="geometric_weather">几何天气</string>
 
     <!-- keyword. -->
-    <string name="current_location">当前位置</string>
+    <string name="current_location">请输入你所在的城市！</string>
     <string name="resident_location">常驻位置</string>
     <string name="default_location">默认位置</string>
     <string name="live">实时</string>
