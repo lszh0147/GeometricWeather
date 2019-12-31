@@ -134,7 +134,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
 
     // cm.
-    implementation 'org.cyanogenmod:platform.sdk:5.0'
+//    implementation 'org.cyanogenmod:pl/atform.sdk:5.0'
 
     // bugly.
 //    implementation 'com.tencent.bugly:crashreport:2.8.6.0'
