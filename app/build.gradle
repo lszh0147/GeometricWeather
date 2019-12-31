@@ -156,5 +156,5 @@ dependencies {
     // utils.
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation 'com.github.XhinLiang:LunarCalendar:3.0.0'
-    implementation 'com.github.didikee:AndroidDonate:0.1.0'
+//    implementation 'com.github.didikee:AndroidDonate:0.1.0'
 }

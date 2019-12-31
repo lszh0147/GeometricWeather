@@ -20,7 +20,7 @@ import wangdaye.com.geometricweather.basic.GeoActivity;
 import wangdaye.com.geometricweather.basic.model.about.AboutAppLibrary;
 import wangdaye.com.geometricweather.basic.model.about.AboutAppLink;
 import wangdaye.com.geometricweather.basic.model.about.AboutAppTranslator;
-import wangdaye.com.geometricweather.utils.helpter.DonateHelper;
+//import wangdaye.com.geometricweather.utils.helpter.DonateHelper;
 import wangdaye.com.geometricweather.utils.helpter.IntentHelper;
 
 /**
@@ -54,8 +54,8 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
         modelList.add(0);
         modelList.add(activity.getString(R.string.about_app));
         modelList.addAll(AboutAppLink.buildLinkList(activity));
-        modelList.add(activity.getString(R.string.donate));
-        modelList.addAll(AboutAppLink.buildDonateLinkList(activity));
+//        modelList.add(activity.getString(R.string.donate));
+//        modelList.addAll(AboutAppLink.buildDonateLinkList(activity));
         modelList.add(0);
         modelList.add(activity.getString(R.string.translator));
         modelList.addAll(AboutAppTranslator.buildTranslatorList());
@@ -179,9 +179,9 @@ class LinkHolder extends AboutAdapter.ViewHolder
     @Override
     public void onClick(View v) {
         if (url.equals(AboutAppLink.LINK_ALIPAY)) {
-            DonateHelper.donateByAlipay(activity);
+//            DonateHelper.donateByAlipay(activity);
         } else if (url.equals(AboutAppLink.LINK_WECHAT)) {
-            DonateHelper.donateByWechat(activity);
+//            DonateHelper.donateByWechat(activity);
         } else if (email) {
             IntentHelper.startWebViewActivity(activity, url);
         } else {
