@@ -13,8 +13,8 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.CoordinateConverter;
 
 import wangdaye.com.geometricweather.GeometricWeather;
-import wangdaye.com.geometricweather.location.LocationException;
-import wangdaye.com.geometricweather.utils.helpter.BuglyHelper;
+//import wangdaye.com.geometricweather.location.LocationException;
+//import wangdaye.com.geometricweather.utils.helpter.BuglyHelper;
 
 /**
  * A map location service.
@@ -51,13 +51,13 @@ public class AMapLocationService extends LocationService {
                         break;
 
                     default:
-                        BuglyHelper.report(
-                                new LocationException(
-                                        aMapLocation.getErrorCode(),
-                                        aMapLocation.getErrorInfo()
-                                )
-                        );
-                        callback.onCompleted(null);
+//                        BuglyHelper.report(
+//                                new LocationException(
+//                                        aMapLocation.getErrorCode(),
+//                                        aMapLocation.getErrorInfo()
+//                                )
+//                        );
+//                        callback.onCompleted(null);
                         break;
                 }
             }
